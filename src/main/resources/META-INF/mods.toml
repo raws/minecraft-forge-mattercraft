@@ -1,0 +1,15 @@
+modLoader="javafml"
+loaderVersion="[35,)"
+
+license="MIT"
+issueTrackerURL="https://github.com/raws/mattercraft/issues"
+
+[[mods]]
+  modId="mattercraft"
+  version="0.1"
+  displayName="Mattercraft"
+  displayURL="https://github.com/raws/mattercraft"
+  authors="Ross Paffett"
+  description='''
+  Bridges chat messages between a Minecraft server and Matterbridge.
+  '''

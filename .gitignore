@@ -1,0 +1,10 @@
+# Forge
+logs/
+run/
+
+# Gradle
+build/
+.gradle
+
+# IntelliJ IDEA
+.idea
