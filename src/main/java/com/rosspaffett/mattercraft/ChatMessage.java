@@ -16,9 +16,4 @@ public class ChatMessage {
     public String getUsername() {
         return this.username;
     }
-
-    @Override
-    public String toString() {
-        return "<" + getUsername() + "> " + getBody();
-    }
 }

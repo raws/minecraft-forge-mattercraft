@@ -1,11 +1,14 @@
 package com.rosspaffett.mattercraft;
 
+import com.google.gson.Gson;
+import com.rosspaffett.mattercraft.matterbridge.SendMessageRequestBody;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ChatMessageSender implements Runnable {
+    private static final Gson GSON = new Gson();
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final ConcurrentLinkedQueue<ChatMessage> messageQueue;
@@ -32,8 +35,10 @@ public class ChatMessageSender implements Runnable {
     }
 
     private void sendMessageToMatterbridge(ChatMessage message) {
-        // TODO Send message to Matterbridge
-        LOGGER.info("Sending message to Matterbridge: " + message.toString());
+        SendMessageRequestBody requestBody = new SendMessageRequestBody("test", message.getUsername(),
+            message.getBody());
+
+        LOGGER.info("Sending message to Matterbridge: " + GSON.toJson(requestBody));
     }
 
     private boolean shouldContinueRunning() {
