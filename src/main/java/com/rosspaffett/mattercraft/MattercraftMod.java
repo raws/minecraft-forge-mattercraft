@@ -42,7 +42,8 @@ public class MattercraftMod {
     }
 
     private void startSendingMessages() {
-        this.outgoingMessageSender = new ChatMessageSender();
+        this.outgoingMessageSender = new ChatMessageSender("example-base-url", "example-gateway",
+            "example-api-token");
 
         Thread outgoingMessageThread = new Thread(this.outgoingMessageSender, "OutgoingMessageThread");
         outgoingMessageThread.start();
