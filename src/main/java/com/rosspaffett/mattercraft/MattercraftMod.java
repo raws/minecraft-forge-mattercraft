@@ -10,10 +10,11 @@ import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod("mattercraft")
+@Mod(MattercraftMod.MOD_ID)
 @Mod.EventBusSubscriber(Dist.DEDICATED_SERVER)
 public class MattercraftMod {
     private static final Logger LOGGER = LogManager.getLogger();
+    public static final String MOD_ID = "mattercraft";
 
     private ChatMessageSender outgoingMessageSender;
 
