@@ -1,17 +1,13 @@
 package com.rosspaffett.mattercraft;
 
-import com.google.gson.Gson;
 import com.rosspaffett.mattercraft.matterbridge.MatterbridgeApiClient;
-import com.rosspaffett.mattercraft.matterbridge.SendMessageRequestBody;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ChatMessageSender implements Runnable {
-    private static final Gson GSON = new Gson();
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final MatterbridgeApiClient matterbridgeApiClient;
@@ -20,7 +16,9 @@ public class ChatMessageSender implements Runnable {
 
     ChatMessageSender(String baseUrl, String gateway, String apiToken) {
         this.matterbridgeApiClient = new MatterbridgeApiClient(baseUrl, gateway, apiToken);
-        this.messageQueue = new ConcurrentLinkedQueue<ChatMessage>();
+        this.messageQueue = new ConcurrentLinkedQueue<>();
+
+        LOGGER.info("Mattercraft will bridge chat messages with gateway \"{}\" at {}", gateway, baseUrl);
     }
 
     public void enqueue(ChatMessage message) {
