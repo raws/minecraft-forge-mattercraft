@@ -1,4 +1,4 @@
-package com.rosspaffett.mattercraft.matterbridge;
+package com.rosspaffett.mattercraft;
 
 import com.google.gson.Gson;
 

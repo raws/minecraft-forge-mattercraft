@@ -1,6 +1,5 @@
 package com.rosspaffett.mattercraft;
 
-import com.rosspaffett.mattercraft.matterbridge.MatterbridgeApiClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

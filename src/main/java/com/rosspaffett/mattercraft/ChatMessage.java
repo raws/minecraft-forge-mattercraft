@@ -1,6 +1,5 @@
 package com.rosspaffett.mattercraft;
 
-import com.rosspaffett.mattercraft.matterbridge.MatterbridgeProtocol;
 import net.minecraft.util.text.StringTextComponent;
 
 public class ChatMessage {

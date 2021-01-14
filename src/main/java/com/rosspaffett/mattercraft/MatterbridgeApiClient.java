@@ -1,7 +1,6 @@
-package com.rosspaffett.mattercraft.matterbridge;
+package com.rosspaffett.mattercraft;
 
 import com.google.gson.Gson;
-import com.rosspaffett.mattercraft.ChatMessage;
 
 import java.io.*;
 import java.lang.reflect.Type;
