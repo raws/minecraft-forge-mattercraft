@@ -65,7 +65,7 @@ public class MatterbridgeApiClient {
         }
     }
 
-    public void sendChatMessage(ChatMessage message) throws IOException {
+    public void sendChatMessage(ChatMessage message) throws IOException, MatterbridgeApiErrorException {
         HttpURLConnection connection = sendChatMessageConnection();
         String requestBody = new SendMessageRequestBody(this.gateway, message.getUsername(),
             message.getText()).toJson();
@@ -75,7 +75,10 @@ public class MatterbridgeApiClient {
             outputStream.write(requestBodyBytes, 0, requestBody.length());
         }
 
-        connection.disconnect();
+        if (connection.getResponseCode() >= 400) {
+            String responseBody = readLines(connection.getErrorStream());
+            throw new MatterbridgeApiErrorException(connection.getResponseCode(), responseBody);
+        }
     }
 
     private HttpURLConnection sendChatMessageConnection() throws IOException {

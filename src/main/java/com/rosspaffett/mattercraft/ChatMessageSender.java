@@ -17,8 +17,6 @@ public class ChatMessageSender implements Runnable {
     ChatMessageSender(String baseUrl, String gateway, String apiToken) {
         this.matterbridgeApiClient = new MatterbridgeApiClient(baseUrl, gateway, apiToken);
         this.messageQueue = new ConcurrentLinkedQueue<>();
-
-        LOGGER.info("Mattercraft will bridge chat messages with gateway \"{}\" at {}", gateway, baseUrl);
     }
 
     public void enqueue(ChatMessage message) {
@@ -42,6 +40,8 @@ public class ChatMessageSender implements Runnable {
             this.matterbridgeApiClient.sendChatMessage(message);
         } catch (IOException e) {
             LOGGER.error("Error connecting to Matterbridge API: " + e.getMessage());
+        } catch (MatterbridgeApiClient.MatterbridgeApiErrorException e) {
+            LOGGER.error(e.getMessage());
         }
     }
 
