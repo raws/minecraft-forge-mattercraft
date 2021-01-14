@@ -22,7 +22,7 @@ The next time you start your server, Forge will automatically create `serverconf
   gateway = "example"
 ```
 
-Configure Mattercraft to connect to your [Matterbridge API configuration](https://github.com/42wim/matterbridge/wiki/API). Then, fire up your server and start chatting!
+Configure Mattercraft to connect to your [Matterbridge API server](https://github.com/42wim/matterbridge/wiki/API). Then, fire up your server and start chatting!
 
 ## Contributing
 
