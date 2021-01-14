@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class MatterbridgeApiClient {
     private static final String GET_UNREAD_CHAT_MESSAGES_PATH = "/api/messages";
-    public static final Gson GSON = new Gson();
+    private static final Gson GSON = new Gson();
     private static final String JSON_MIME_TYPE = "application/json";
     private static final String SEND_CHAT_MESSAGE_PATH = "/api/message";
 
