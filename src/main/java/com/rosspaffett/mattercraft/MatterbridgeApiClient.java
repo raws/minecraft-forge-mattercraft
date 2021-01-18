@@ -1,19 +1,17 @@
 package com.rosspaffett.mattercraft;
 
-import com.google.gson.Gson;
-
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.stream.Collectors;
 
 public class MatterbridgeApiClient {
-    private static final String GET_UNREAD_CHAT_MESSAGES_PATH = "/api/messages";
-    private static final Gson GSON = new Gson();
+    private static final int CONNECT_TIMEOUT = 30_000;
     private static final String JSON_MIME_TYPE = "application/json";
+    public static final int READ_TIMEOUT = 5_000;
     private static final String SEND_CHAT_MESSAGE_PATH = "/api/message";
+    private static final String STREAM_CHAT_MESSAGES_PATH = "/api/stream";
 
     private final String apiToken;
     private final String gateway;
@@ -31,31 +29,6 @@ public class MatterbridgeApiClient {
 
     private String authorizationHeader() {
         return "Bearer " + this.apiToken;
-    }
-
-    public ChatMessage[] getUnreadChatMessages() throws IOException, MatterbridgeApiErrorException {
-        HttpURLConnection connection = getUnreadChatMessagesConnection();
-        String responseBody;
-
-        if (connection.getResponseCode() >= 400) {
-            responseBody = readLines(connection.getErrorStream());
-            throw new MatterbridgeApiErrorException(connection.getResponseCode(), responseBody);
-        }
-
-        responseBody = readLines(connection.getInputStream());
-        return GSON.fromJson(responseBody, (Type)ChatMessage[].class);
-    }
-
-    private HttpURLConnection getUnreadChatMessagesConnection() throws IOException {
-        URL url = apiUrl(GET_UNREAD_CHAT_MESSAGES_PATH);
-        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-
-        connection.setRequestMethod("GET");
-
-        connection.setRequestProperty("Accept", JSON_MIME_TYPE);
-        connection.setRequestProperty("Authorization", authorizationHeader());
-
-        return connection;
     }
 
     private String readLines(InputStream stream) throws IOException {
@@ -91,6 +64,19 @@ public class MatterbridgeApiClient {
         connection.setRequestProperty("Content-Type", JSON_MIME_TYPE);
 
         connection.setDoOutput(true);
+
+        return connection;
+    }
+
+    public HttpURLConnection streamMessagesConnection() throws IOException {
+        URL url = apiUrl(STREAM_CHAT_MESSAGES_PATH);
+        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Accept", JSON_MIME_TYPE);
+        connection.setRequestProperty("Authorization", authorizationHeader());
+        connection.setConnectTimeout(CONNECT_TIMEOUT);
+        connection.setReadTimeout(READ_TIMEOUT);
 
         return connection;
     }
