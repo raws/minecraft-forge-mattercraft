@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 public class MatterbridgeApiClient {
@@ -43,7 +44,7 @@ public class MatterbridgeApiClient {
             message.getText()).toJson();
 
         try (OutputStream outputStream = connection.getOutputStream()) {
-            byte[] requestBodyBytes = requestBody.getBytes("UTF-8");
+            byte[] requestBodyBytes = requestBody.getBytes(StandardCharsets.UTF_8);
             outputStream.write(requestBodyBytes, 0, requestBody.length());
         }
 
