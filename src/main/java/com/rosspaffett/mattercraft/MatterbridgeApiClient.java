@@ -82,7 +82,7 @@ public class MatterbridgeApiClient {
         return connection;
     }
 
-    public class MatterbridgeApiErrorException extends Exception {
+    public static class MatterbridgeApiErrorException extends Exception {
         private final int responseCode;
 
         public MatterbridgeApiErrorException(int responseCode, String responseBody) {
