@@ -45,7 +45,7 @@ public class MatterbridgeApiClient {
 
         try (OutputStream outputStream = connection.getOutputStream()) {
             byte[] requestBodyBytes = requestBody.getBytes(StandardCharsets.UTF_8);
-            outputStream.write(requestBodyBytes, 0, requestBody.length());
+            outputStream.write(requestBodyBytes, 0, requestBodyBytes.length);
         }
 
         if (connection.getResponseCode() >= 400) {
